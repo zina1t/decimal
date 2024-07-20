@@ -12,10 +12,14 @@ int s21_get_scale(s21_decimal num) {
     scale <<= 1;
     scale |= s21_get_bit(num, i);
   }
+  printf("scale %d\n", scale);
   return scale;
 }
 
-int s21_get_sign(s21_decimal num) { return s21_get_bit(num, 127); }
+int s21_get_sign(s21_decimal num) { 
+  printf("Sign: %d\n", s21_get_bit(num, 127));
+  return s21_get_bit(num, 127); 
+}
 
 int s21_is_zero(s21_decimal num) {
   int is_zero = 0;
@@ -42,6 +46,7 @@ void s21_normalize(s21_decimal* num1, s21_decimal* num2) {
     if (flag) break;
     s21_set_scale(temp, s21_get_scale(*temp) + 1);
   }
+  printf("normalized\n");
 }
 
 void s21_set_bit(s21_decimal* num, int bit, unsigned value) {
