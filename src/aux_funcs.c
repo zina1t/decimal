@@ -6,6 +6,16 @@ int s21_get_bit(s21_decimal num, int bit) {
   return (num.bits[num_int] & (1u << num_bit)) >> num_bit;
 }
 
+void s21_set_bit(s21_decimal* num, int bit, unsigned value) {
+  int num_int = bit / 32;
+  int num_bit = bit % 32;
+  if (value == 1) {
+    num->bits[num_int] |= (1u << num_bit);
+  } else {
+    num->bits[num_int] &= (~((1u) << num_bit));
+  }
+}
+
 int s21_get_scale(s21_decimal num) {
   int scale = 0;
   for (int i = 96 + 23; i >= 96 + 16; i--) {
@@ -27,7 +37,7 @@ int s21_is_zero(s21_decimal num) {
   return is_zero;
 }
 
-void s21_normalize(s21_decimal* num1, s21_decimal* num2) {
+/* void s21_normalize(s21_decimal* num1, s21_decimal* num2) {
   s21_decimal* temp;
   int diff;
   int flag = 0;
@@ -44,17 +54,8 @@ void s21_normalize(s21_decimal* num1, s21_decimal* num2) {
     if (flag) break;
     s21_set_scale(temp, s21_get_scale(*temp) + 1);
   }
-}
+} */
 
-void s21_set_bit(s21_decimal* num, int bit, unsigned value) {
-  int num_int = bit / 32;
-  int num_bit = bit % 32;
-  if (value == 1) {
-    num->bits[num_int] |= (1u << num_bit);
-  } else {
-    num->bits[num_int] &= (~((1u) << num_bit));
-  }
-}
 
 void s21_reset_bit(s21_decimal* num, int bit) {
   int num_int = bit / 32;
