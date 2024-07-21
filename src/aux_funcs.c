@@ -1,6 +1,6 @@
 #include "s21_decimal.h"
 
-int s21_get_bit(s21_decimal num, int bit) {
+int s21_get_bit(s21_decimal num, int bit) { 
   int num_int = bit / 32;
   int num_bit = bit % 32;
   return (num.bits[num_int] & (1u << num_bit)) >> num_bit;
@@ -12,12 +12,10 @@ int s21_get_scale(s21_decimal num) {
     scale <<= 1;
     scale |= s21_get_bit(num, i);
   }
-  printf("scale %d\n", scale);
   return scale;
 }
 
 int s21_get_sign(s21_decimal num) { 
-  printf("Sign: %d\n", s21_get_bit(num, 127));
   return s21_get_bit(num, 127); 
 }
 
@@ -46,7 +44,6 @@ void s21_normalize(s21_decimal* num1, s21_decimal* num2) {
     if (flag) break;
     s21_set_scale(temp, s21_get_scale(*temp) + 1);
   }
-  printf("normalized\n");
 }
 
 void s21_set_bit(s21_decimal* num, int bit, unsigned value) {
@@ -57,6 +54,12 @@ void s21_set_bit(s21_decimal* num, int bit, unsigned value) {
   } else {
     num->bits[num_int] &= (~((1u) << num_bit));
   }
+}
+
+void s21_reset_bit(s21_decimal* num, int bit) {
+  int num_int = bit / 32;
+  int num_bit = bit % 32;
+  num->bits[num_int] &= (~((1u) << num_bit));
 }
 
 void s21_set_scale(s21_decimal* num, int scale_value) {
@@ -76,4 +79,20 @@ void s21_shift_left(s21_decimal* num) {
     num->bits[i] |= memory;
     memory = temp >> (32 - 1);
   }
+}
+
+int s21_not_zero_bit(s21_decimal num) {
+  int res = -1;
+  for (int i = 127; i >= 0; i--) {
+    if (s21_get_bit(num, i)) { //мб нужна функция для проверки бита
+      res = i;
+      break;
+    }
+  }
+  return res;
+}
+
+s21_decimal set_zero() {
+  s21_decimal zero = {{0, 0, 0, 0}};
+  return zero;
 }
