@@ -1,5 +1,4 @@
 #include "binary.h"
-#include "helpers.h"
 
 s21_decimal s21_binary_and(s21_decimal num1, s21_decimal num2) {
     s21_decimal res = {{0, 0, 0, 0}};
@@ -24,3 +23,45 @@ s21_decimal s21_binary_xor(s21_decimal num1, s21_decimal num2) {
     }
     return res;
 }
+
+void s21_shift_left(s21_decimal* num) {
+  unsigned memory = 0;
+  for (int i = 0; i < (int)sizeof(s21_decimal) / sizeof(unsigned) - 1; ++i) {
+    unsigned temp = num->bits[i];
+    num->bits[i] <<= 1;
+    num->bits[i] |= memory;
+    memory = temp >> (32 - 1);
+  }
+}
+
+int s21_decimal_is_zero(s21_decimal num) {
+  for (int i = 0; i < 4; i++) {
+    if (num.bits[i] != 0) {
+      return 0;
+    }
+  }
+  return 1;
+}
+
+int s21_decimal_compare(s21_decimal num1, s21_decimal num2) { 
+    for (int i = 3; i >= 0; i--) {
+        if (num1.bits[i] > num2.bits[i]) {
+        return 1;
+        } else if (num1.bits[i] < num2.bits[i]) {
+        return -1;
+        }
+    }
+  return 0;
+}
+
+int s21_big_decimal_compare(s21_big_decimal num1, s21_big_decimal num2) {
+    for (int i = 7; i >= 0; i--) {
+        if (num1.bits[i] > num2.bits[i]) {
+            return 1;
+        } else if (num1.bits[i] < num2.bits[i]) {
+            return -1;
+        }
+    }
+    return 0;
+}
+
