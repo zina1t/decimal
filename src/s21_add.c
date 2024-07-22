@@ -27,9 +27,14 @@ int s21_add(s21_decimal num1, s21_decimal num2, s21_decimal* res) {
         s21_set_bit(&result, sum, i);
     }
 
-    // Check for overflow
+    // Check for overflow and underflow
+    int sign1 = s21_get_sign(temp1);
+    int sign2 = s21_get_sign(temp2);
+
     if (carry != 0) {
-        return 1; // Overflow occurred
+        if (sign1 == sign2) {
+            return (sign1 == 0) ? 1 : 2; // Overflow or underflow depending on sign
+        }
     }
 
     // Set the scale of the result
@@ -37,13 +42,10 @@ int s21_add(s21_decimal num1, s21_decimal num2, s21_decimal* res) {
     s21_set_scale(&result, scale);
 
     // Set the sign of the result
-    int sign1 = s21_get_sign(temp1);
-    int sign2 = s21_get_sign(temp2);
-
     if (sign1 == sign2) {
         s21_set_sign(&result, sign1);
     } else {
-        // Handle mixed signs (considering larger magnitude for sign determination)
+        // Handle mixed signs by comparing magnitudes
         if (s21_get_last_bit(temp1) > s21_get_last_bit(temp2)) {
             s21_set_sign(&result, sign1);
         } else {
