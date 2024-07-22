@@ -24,16 +24,6 @@ s21_decimal s21_binary_xor(s21_decimal num1, s21_decimal num2) {
     return res;
 }
 
-void s21_shift_left(s21_decimal* num) {
-  unsigned memory = 0;
-  for (int i = 0; i < (int)sizeof(s21_decimal) / sizeof(unsigned) - 1; ++i) {
-    unsigned temp = num->bits[i];
-    num->bits[i] <<= 1;
-    num->bits[i] |= memory;
-    memory = temp >> (32 - 1);
-  }
-}
-
 int s21_decimal_is_zero(s21_decimal num) {
   for (int i = 0; i < 4; i++) {
     if (num.bits[i] != 0) {

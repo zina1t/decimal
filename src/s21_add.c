@@ -1,5 +1,6 @@
 #include "s21_decimal.h"
 
+/*
 int s21_add(s21_decimal num1, s21_decimal num2, s21_decimal* res) {
     int carry = 0;
     for (int i = 0; i < 4; i++) {
@@ -18,3 +19,4 @@ int s21_add_help(s21_decimal num1, s21_decimal num2, s21_decimal* res) {
     s21_big_normalize(num1, num2, &big_num1, &big_num2);
     s21_big_decimal result = s21_big_binary_add(big_num1, big_num2);
 }
+*/
