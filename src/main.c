@@ -2,7 +2,7 @@
 #include "s21_decimal.h"
 int main(void) {
     s21_decimal decimal1 = {{0x1, 0x0, 0x0, 0x0}};
-    s21_decimal decimal2 = {{0x9999999A, 0x99999999, 0x19999999, 0x80000000}};
+    s21_decimal decimal2 = {{0x3, 0x0, 0x0, 0x80000000}}; //doesn't work with 1 - (-3)
     s21_decimal result = {{0, 0, 0, 0}};
     s21_sub(decimal1, decimal2, &result);
     printf("error%d\n", s21_sub(decimal1, decimal2, &result));
