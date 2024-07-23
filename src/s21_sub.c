@@ -1,6 +1,6 @@
 #include "s21_decimal.h"
 
-int s21_subtract(s21_decimal num1, s21_decimal num2, s21_decimal* res) {
+int s21_sub(s21_decimal num1, s21_decimal num2, s21_decimal* res) {
     s21_decimal result = {0};
     int borrow = 0;
     align_scales(&num1, &num2);

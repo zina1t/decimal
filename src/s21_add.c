@@ -30,9 +30,9 @@ int s21_add(s21_decimal num1, s21_decimal num2, s21_decimal* res) {
         *res = result;
     } else {
         if (s21_is_greater(temp1, temp2)) {
-            s21_subtract(temp1, temp2, res);
+            s21_sub(temp1, temp2, res);
         } else {
-            s21_subtract(temp2, temp1, res);
+            s21_sub(temp2, temp1, res);
         }
     }
 
