@@ -27,6 +27,18 @@ void s21_set_sign(s21_decimal* num, int sign);
 int s21_get_scale(s21_decimal num);
 void s21_set_scale(s21_decimal* num, int scale_value);
 void align_scales(s21_decimal *num1, s21_decimal *num2);
-int s21_add (s21_decimal num1, s21_decimal num2, s21_decimal * result);
+int s21_add(s21_decimal num1, s21_decimal num2, s21_decimal * result);
 
 int s21_correct_decimal(s21_decimal num);
+
+int s21_subtract(s21_decimal num1, s21_decimal num2, s21_decimal* res);
+
+int s21_decimal_null(s21_decimal num);
+int s21_is_greater(s21_decimal num1, s21_decimal num2);
+int s21_is_equal(s21_decimal num1, s21_decimal num2);
+int s21_is_less(s21_decimal num1, s21_decimal num2);
+
+s21_decimal* convert(s21_decimal* num);
+
+s21_decimal s21_negate(s21_decimal num);
+int compare_magnitude(s21_decimal num1, s21_decimal num2);
