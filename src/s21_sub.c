@@ -40,7 +40,7 @@ int s21_sub(s21_decimal num1, s21_decimal num2, s21_decimal* res) {
         int scale = s21_get_scale(num1);
         s21_set_scale(&result, scale);
         if (magnitude_comparison < 0) {
-            s21_set_sign(&result, s21_get_sign(num2));
+            result = s21_negate(result);
         } else {
             s21_set_sign(&result, s21_get_sign(num1));
         }
