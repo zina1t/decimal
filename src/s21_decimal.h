@@ -32,7 +32,7 @@ int s21_add(s21_decimal num1, s21_decimal num2, s21_decimal * result);
 int s21_correct_decimal(s21_decimal num);
 
 int s21_sub(s21_decimal num1, s21_decimal num2, s21_decimal* res);
-
+int s21_mul(s21_decimal num1, s21_decimal num2, s21_decimal* result);
 int s21_decimal_null(s21_decimal num);
 int s21_is_greater(s21_decimal num1, s21_decimal num2);
 int s21_is_equal(s21_decimal num1, s21_decimal num2);

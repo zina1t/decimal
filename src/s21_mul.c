@@ -1,18 +1,21 @@
 #include "s21_decimal.h"
 
-int s21_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal* result) {
-  s21_decimal temp = {{0, 0, 0, 0}};
-  s21_decimal temp2 = value_2;
-  s21_set_sign(&temp2, 0);
-  s21_set_sign(&temp, 0);
-  s21_set_scale(&temp, s21_get_scale(value_1) + s21_get_scale(value_2));
-  for (int i = 0; i < 96; i++) {
-    if (s21_get_bit(value_1, i)) {
-      s21_add(temp, temp2, &temp);
+int s21_mul(s21_decimal num1, s21_decimal num2, s21_decimal* result) {
+    int sign1 = s21_get_sign(num1);
+    int sign2 = s21_get_sign(num2);
+    s21_set_sign(&num1, 0);
+    s21_set_sign(&num2, 0);
+    s21_decimal res = {0};
+    for (int i = 0; i < 96; i++) {
+        if (s21_get_bit(num1, i)) {
+            s21_decimal temp = num2;
+            for (int j = 0; j < i; j++) {
+                temp = *shift_left(&temp, 1);
+            }
+            s21_add(res, temp, &res);
+        }
     }
-    s21_shift_left(&temp2);
-  }
-  s21_set_sign(result, s21_get_sign(value_1) ^ s21_get_sign(value_2));
-  *result = temp;
-  return 0;
+    s21_set_sign(&res, sign1 ^ sign2);
+    *result = res;
+    return 0;
 }
