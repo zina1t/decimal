@@ -4,16 +4,13 @@ int int_to_decimal(int i, s21_decimal* result) {
     int sign = 0;
     if (i < 0) {
         sign = 1;
-        i = -i;
-    }
-    s21_decimal res = {0};
-    for (int j = 0; j < 96; j++) {
-        if (i & 1) {
-            res.bits[j / 32] |= 1 << (j % 32);
+        if (i != INT_MIN) {
+            i = -i;
         }
-        i >>= 1;
+    } else {
+        sign = 0;
     }
-    s21_set_sign(&res, sign);
-    *result = res;
+    result->bits[0] = i;
+    s21_set_sign(result, sign);
     return 0;
 }

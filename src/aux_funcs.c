@@ -188,3 +188,8 @@ s21_decimal s21_negate(s21_decimal num) {
     s21_set_sign(&num, !s21_get_sign(num));
     return num;
 }
+
+s21_decimal get_zero() {
+    s21_decimal zero = {0};
+    return zero;
+}

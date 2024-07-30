@@ -46,3 +46,6 @@ int compare_magnitude(s21_decimal num1, s21_decimal num2);
 
 int float_to_decimal(float f, s21_decimal* result);
 int int_to_decimal(int i, s21_decimal* result);
+
+s21_decimal get_zero();
+s21_decimal clear_decimal(s21_decimal num);
