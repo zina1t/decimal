@@ -30,11 +30,44 @@ int s21_add(s21_decimal num1, s21_decimal num2, s21_decimal* res) {
         *res = result;
     } else {
         if (s21_is_greater(temp1, temp2)) {
+            printf("temp1 is greater\n");
+            s21_set_sign(&temp2, 0);
             s21_sub(temp1, temp2, res);
         } else {
+            printf("temp2 is greater\n");
             s21_sub(temp2, temp1, res);
         }
     }
 
     return 0; 
 }
+
+
+/*
+
+79228162514264337593543950335 
+    s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+-7922816251426433759354395033.5
+    s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80010000}};
+71305346262837903834189555302
+    s21_decimal check = {{0x66666666, 0x66666666, 0xE6666666, 0x0}};
+count error
+
+79228162514264337593543950335
+    s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+-0.5
+    s21_decimal decimal2 = {{0x5, 0x0, 0x0, 0x80010000}};
+79228162514264337593543950334
+    s21_decimal check = {{0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+count error
+
+
+79228162514264337593543950335
+    s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+0.4999999999999999999999999999
+    s21_decimal decimal2 = {{0x87FFFFFF, 0x1F128130, 0x1027E72F, 0x1C0000}};
+79228162514264337593543950335
+    s21_decimal check = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+error 1, but should be 0
+
+*/
