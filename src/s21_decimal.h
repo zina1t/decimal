@@ -33,6 +33,7 @@ int s21_correct_decimal(s21_decimal num);
 
 int s21_sub(s21_decimal num1, s21_decimal num2, s21_decimal* res);
 int s21_mul(s21_decimal num1, s21_decimal num2, s21_decimal* result);
+
 int s21_decimal_null(s21_decimal num);
 int s21_is_greater(s21_decimal num1, s21_decimal num2);
 int s21_is_equal(s21_decimal num1, s21_decimal num2);
@@ -42,3 +43,6 @@ s21_decimal* convert(s21_decimal* num);
 
 s21_decimal s21_negate(s21_decimal num);
 int compare_magnitude(s21_decimal num1, s21_decimal num2);
+
+int float_to_decimal(float f, s21_decimal* result);
+int int_to_decimal(int i, s21_decimal* result);
